@@ -40,6 +40,9 @@ function menu() {
             else if (response.option === "update an employee role") {
                 updateEmployee()
             }
+            if (response.option === "view all departments") {
+                viewAllDepartments();
+            }
         })
 }
 
@@ -156,4 +159,14 @@ function viewAllEmployees() {
     console.table(rows);
     menu();
    })
+}
+
+function viewAllDepartments() {
+    db.promise().query(
+        `SELECT * FROM department;`
+    ).then(function(data) {
+        let [rows] = data;
+        console.table(rows);
+        menu();
+    })
 }
