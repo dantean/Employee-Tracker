@@ -45,6 +45,9 @@ function menu() {
             }
             else if (response.option === "add a department") {
                 addDepartment();
+            } 
+            else if (response.option === "add a role") {
+                addRole();
             }
         })
 }
@@ -192,7 +195,45 @@ function addDepartment() {
                 })
 
             })
+}
 
+function addRole() {
+
+
+        db.query(`SELECT id as value, name FROM department;`, (err, departmentData) => {
+            inquirer.prompt([{
+                type: "list",
+                message: "Which department does this role belong to?",
+                name: "department_id",
+                choices: departmentData
+
+            },
+            {
+                type: "input",
+                message: "What is the title of this role?",
+                name: "title",
+            },
+            {
+                type: "input",
+                message: "Enter the Salary for this role.",
+                name: "salary"
+            }           
+            ])
+            .then(response => {
+
+
+
+                db.query(`insert into role(title,salary,department_id)values ("${response.title}",${response.salary},"${response.department_id}")`, (err) => {
+
+                    viewAllRoles();
+                })
+
+            })
+
+        })
            
+
+
+
 
 }
