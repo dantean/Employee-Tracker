@@ -40,8 +40,11 @@ function menu() {
             else if (response.option === "update an employee role") {
                 updateEmployee()
             }
-            if (response.option === "view all departments") {
+            else if (response.option === "view all departments") {
                 viewAllDepartments();
+            }
+            else if (response.option === "add a department") {
+                addDepartment();
             }
         })
 }
@@ -169,4 +172,27 @@ function viewAllDepartments() {
         console.table(rows);
         menu();
     })
+}
+
+function addDepartment() {
+            inquirer.prompt([{
+                type: "input",
+                message: "What is the department name?",
+                name: "department_name"
+            },
+            ])
+            .then(response => {
+
+
+
+                db.query(`insert into department(name)values ("${response.department_name}")`, (err) => {
+
+                    viewAllDepartments()
+                    menu();
+                })
+
+            })
+
+           
+
 }

@@ -19,3 +19,4 @@ SELECT employee.id as id, employee.first_name, employee.last_name, title,
 
  SELECT * FROM employee;
 
+-- SELECT = SHOW DATA || INSERT = ADD DATA || UPDATE = UPDATE DATA || DELETE = DELETE DATA
